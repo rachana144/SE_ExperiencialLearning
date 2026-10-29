@@ -2,41 +2,109 @@
 
 
 
-\## 1. What issues did the static analysis tools identify?
+\## 1. Objective
 
 
 
-Pylint gave the original program a score of 5.37/10, indicating that the code needed improvement. Bandit reported five potential security issues, including the use of `os.system()`, MD5 hashing, `eval()`, a bare exception handler, and a standard random-number generator for booking PINs. Flake8 reported seven style and code-quality findings, including an unused import, an overly long line, unused variables, an incorrect comparison to `None`, and a missing final newline.
+The objective of this lab was to analyze Python code using Pylint, Bandit, and Flake8, identify code-quality and security issues, and improve the program based on the findings.
 
 
 
-\## 2. Which issue was the most important to fix, and why?
+\## 2. Initial Analysis
 
 
 
-The potential shell-command injection issue involving `os.system()` was a priority because shell commands can be dangerous when constructed using untrusted input. The use of `eval()` was also important because evaluating arbitrary expressions can execute unintended code. These issues should be addressed carefully and tested after the changes.
+The original `ticket\_booking\_system.py` file had several code-quality problems, formatting violations, and potential security vulnerabilities.
 
 
 
-\## 3. How did the tools complement each other?
+The initial results were:
 
 
 
-Pylint assessed overall Python code quality and maintainability. Bandit focused on potential security weaknesses. Flake8 identified style violations and common coding mistakes. Using all three provided a broader review than relying on just one tool.
+| Tool | Initial Result |
+
+|---|---|
+
+| Pylint | 5.37/10 |
+
+| Bandit | 5 findings |
+
+| Flake8 | 7 findings |
 
 
 
-\## 4. What did I learn from this lab?
+\## 3. Improvements Made
 
 
 
-I learned that static analysis tools can identify potential security problems, unused code, and style issues before software is deployed. I also learned that findings should be checked against the source code, fixed carefully, and verified by rerunning the tools and testing the program. Comparing before-and-after reports helps demonstrate whether the changes improved the code.
+The program was updated to address the issues found during static analysis.
 
 
 
-\## Final Results
+\- Removed unused imports and variables.
+
+\- Improved function names and documentation.
+
+\- Corrected exception handling and comparisons with `None`.
+
+\- Replaced `eval()` with direct arithmetic and discount validation.
+
+\- Replaced MD5 with SHA-256.
+
+\- Used the `secrets` module to generate booking PINs.
+
+\- Removed unsafe shell execution.
+
+\- Retrieved the box-office key from an environment variable rather than hardcoding it.
+
+\- Corrected formatting and added the final newline.
 
 
 
-The original Pylint score was 5.37/10. Final results will be added after all fixes have been implemented, the program has been tested, and all three analysis tools have been run again.
+\## 4. Final Results
+
+
+
+After applying the changes, all three tools were run again.
+
+
+
+| Tool | Initial Result | Final Result |
+
+|---|---|---|
+
+| Pylint | 5.37/10 | 10.00/10 |
+
+| Bandit | 5 findings | 0 findings |
+
+| Flake8 | 7 findings | 0 findings |
+
+
+
+\## 5. What I Learned
+
+
+
+This lab helped me understand the importance of static code analysis in software development.
+
+
+
+Pylint helped me improve code quality and maintainability. Flake8 helped me identify formatting problems and common Python mistakes. Bandit helped me identify potentially unsafe coding practices, including dynamic expression evaluation, weak hashing, and shell command execution.
+
+
+
+I also learned that removing hardcoded secrets, using secure random-number generation, and avoiding unsafe functions can improve the security of a program.
+
+
+
+\## 6. Conclusion
+
+
+
+The lab demonstrated how static analysis tools can identify issues before software is deployed. The final code achieved a Pylint score of 10.00/10, zero Flake8 findings, and zero Bandit findings.
+
+
+
+Although the final static analysis results were clean, additional functional testing and security review would still be useful to verify the overall behavior and security of the application.
 
